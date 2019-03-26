@@ -1,8 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QString>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QByteArray>
+#include "server.h"
+
+
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -16,8 +19,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_plusButton_clicked()
+
+
+void MainWindow::on_createBut_clicked()
 {
-
+    QString name = ui->nameEdit->text();
+    int port = ui->portEdit->text().toInt();
 }
-

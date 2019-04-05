@@ -41,6 +41,10 @@ private slots:
     void downloadEnd();
 
 
+    void on_pushButtonSetNameCollection_2_clicked();
+
+    void on_Requestbtn_clicked();
+
 private:
     Ui::OpenFIle *ui;
 

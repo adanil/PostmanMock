@@ -111,3 +111,8 @@ void OpenFIle::downloadEnd()
     showCollection();
 }
 
+
+void OpenFIle::on_Requestbtn_clicked()
+{
+    QString request=ui->textBrowserRequest->toPlainText();
+}

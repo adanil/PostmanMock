@@ -27,7 +27,7 @@
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="elideMode">
      <enum>Qt::ElideNone</enum>
@@ -83,6 +83,58 @@
         </widget>
        </item>
       </layout>
+     </widget>
+     <widget class="QPushButton" name="serversettingsbtn">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>0</y>
+        <width>344</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Настройки сервера</string>
+      </property>
+      <property name="shortcut">
+       <string>Return</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="portedit">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>60</y>
+        <width>341</width>
+        <height>24</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="nameedit">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>100</y>
+        <width>341</width>
+        <height>24</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="acceptsettingsbtn">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>150</y>
+        <width>344</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Принять(Требуется перезапуск)</string>
+      </property>
+      <property name="shortcut">
+       <string>Return</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_4">

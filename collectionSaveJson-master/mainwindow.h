@@ -47,6 +47,10 @@ private slots:
     //Активация кнопки после окончания загрузки файла
     void enableButtonTrue();
 
+    void on_serversettingsbtn_clicked();
+
+    void on_acceptsettingsbtn_clicked();
+
 private:
     //Вектор с файлами которые были открыты
     QList <OpenFIle*> o;

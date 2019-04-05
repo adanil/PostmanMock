@@ -19,7 +19,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lineEditNameCollection->setPlaceholderText("Введите имя коллекции");
     ui->lineEditCollectionOpenName->setPlaceholderText("Введите имя коллекции");
     ui->lineEditURL->setPlaceholderText("https://www.getpostman.com/collections/807270dbc2fbf5b2d9fc");
-
+    ui->acceptsettingsbtn->hide();
+    ui->portedit->hide();
+    ui->nameedit->hide();
+    ui->portedit->setPlaceholderText("Server Port");
+    ui->nameedit->setPlaceholderText("Server Name");
     QTabBar *tabBar = ui->tabWidget->tabBar();
     tabBar->tabButton(0, QTabBar::RightSide)->hide();
     tabBar->tabButton(1, QTabBar::RightSide)->hide();
@@ -153,4 +157,29 @@ void MainWindow::on_tabWidget_tabCloseRequested(int indexTab)
     delete o[indexList];
 
     o.erase(o.begin()+indexList);
+}
+
+void MainWindow::on_serversettingsbtn_clicked()
+{
+    ui->acceptsettingsbtn->show();
+    ui->nameedit->show();
+    ui->portedit->show();
+    ui->serversettingsbtn->hide();
+}
+
+void MainWindow::on_acceptsettingsbtn_clicked()
+{
+    ui->acceptsettingsbtn->hide();
+    ui->nameedit->hide();
+    ui->portedit->hide();
+    ui->serversettingsbtn->show();
+    QFile file("C:/Users/Dmitriy Tsuckanov/Documents/postman/collectionSaveJson-master/name.txt");//Относительный путь сюда нужно
+    file.open(QFile::WriteOnly | QFile::Text);
+    file.write(ui->nameedit->text().toLocal8Bit());
+    file.close();
+    QFile file2("C:/Users/Dmitriy Tsuckanov/Documents/postman/collectionSaveJson-master/port.txt");//Относительный путь сюда нужно
+    file2.open(QFile::WriteOnly | QFile::Text);
+    file2.write(ui->portedit->text().toLocal8Bit());
+    file2.close();
+
 }

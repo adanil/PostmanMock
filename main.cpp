@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    QMap <QString,QString> mp;
+    QMap <QString,QVariant> mp;
     mp.insert("auth","null");
     mp.insert("hello","world");
     Server myServer(0,6001,"Danil",mp);

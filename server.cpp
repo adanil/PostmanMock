@@ -1,8 +1,8 @@
 #include "server.h"
 #include <QDebug>
 #include <QCoreApplication>
-#include <QString>
-Server::Server(QObject *parent,quint16 port,QString nameHost,QMap<QString,QString> collection_) : QObject(parent)
+
+Server::Server(QObject *parent,quint16 port,QString nameHost,QMap<QString,QVariant> collection_) : QObject(parent)
 {
     myServer = new QTcpServer(this);
     name = nameHost;
@@ -36,12 +36,13 @@ Server::~Server(){
         {
             qDebug() << "New request";
             QByteArray array = mySocket->readAll();
+            qDebug() << array;
             QString s = "";
             QString arrS = (QString)array;
             for (int i = 0;i <arrS.size()-2;i++)
                 s.append(arrS[i]);
-            qDebug() << "Request: " << s << " Answer: " << collection[s].toUtf8();
-            mySocket->write(collection[s].toUtf8());
+            qDebug() << "Request: " << s << " Answer: " << collection[s].toString().toUtf8();
+            mySocket->write(collection[s].toString().toUtf8());
         }
     }
 

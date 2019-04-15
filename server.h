@@ -7,12 +7,12 @@
 #include <QVector>
 #include <QString>
 #include <QMap>
-
+#include <QVariant>
 class Server : public QObject
 {
     Q_OBJECT
 public:
-    explicit Server(QObject *parent = 0,quint16 port = 6000,QString nameHost = "Host",QMap<QString,QString> collection_ = {});
+    explicit Server(QObject *parent = 0,quint16 port = 6000,QString nameHost = "Host",QMap<QString,QVariant> collection_ = {});
     ~Server();
 public slots:
     void slotNewConnection();
@@ -24,7 +24,7 @@ private:
     QTcpServer * myServer;
     QTcpSocket * mySocket;
     QString name;
-    QMap <QString,QString> collection;
+    QMap <QString,QVariant> collection;
 };
 
 #endif // SERVER_H

@@ -1,30 +1,25 @@
 #ifndef SERVER_H
 #define SERVER_H
 
-#include <QObject>
 #include <QTcpServer>
-#include <QTcpSocket>
-#include <QVector>
-#include <QString>
+#include "mythread.h"
 #include <QMap>
 #include <QVariant>
-class Server : public QObject
+
+class MyServer : public QTcpServer
 {
     Q_OBJECT
 public:
-    explicit Server(QObject *parent = 0,quint16 port = 6000,QString nameHost = "Host",QMap<QString,QVariant> collection_ = {});
-    ~Server();
+    explicit MyServer(QObject *parent = 0);
+    void startServer(int port_ = 6000,QMap<QString,QVariant> collection_ = {});
+signals:
+
 public slots:
-    void slotNewConnection();
-    void slotServerRead();
-    void slotClientDisconnected();
 
-
-private:
-    QTcpServer * myServer;
-    QTcpSocket * mySocket;
-    QString name;
-    QMap <QString,QVariant> collection;
+protected:
+    void incomingConnection(qintptr socketDescriptor);
+    int port;
+    QMap<QString,QVariant> collection;
 };
 
 #endif // SERVER_H

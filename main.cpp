@@ -1,26 +1,17 @@
+// main.cpp
 
-#include "mainwindow.h"
-#include <QApplication>
+#include <QCoreApplication>
 #include "server.h"
-#include <QtCore/QDebug>
-#include <QtCore/QJsonDocument>
-#include <QtCore/QCoreApplication>
-#include <QMap>
-
-// Network
-#include <QtNetwork/QNetworkReply>
-#include <QtNetwork/QNetworkRequest>
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    MainWindow w;
+    QCoreApplication a(argc, argv);
     QMap <QString,QVariant> mp;
     mp.insert("auth","null");
     mp.insert("hello","world");
-    Server myServer(0,6001,"Danil",mp);
-
-    w.show();
+    // Make a server and starts it
+    MyServer server;
+    server.startServer(6000,mp);
 
     return a.exec();
 }

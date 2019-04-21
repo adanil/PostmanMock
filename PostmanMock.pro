@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
-QT       += network
+QT       += core network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -28,11 +28,13 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    server.cpp
+    server.cpp \
+    mythread.cpp
 
 HEADERS += \
         mainwindow.h \
-    server.h
+    server.h \
+    mythread.h
 
 FORMS += \
         mainwindow.ui

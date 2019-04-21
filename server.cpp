@@ -1,54 +1,37 @@
+// myserver.cpp
+
 #include "server.h"
-#include <QDebug>
-#include <QCoreApplication>
+#include "mythread.h"
 
-Server::Server(QObject *parent,quint16 port,QString nameHost,QMap<QString,QVariant> collection_) : QObject(parent)
+MyServer::MyServer(QObject *parent) :
+    QTcpServer(parent)
 {
-    myServer = new QTcpServer(this);
-    name = nameHost;
-    collection = collection_;
-
-        connect(myServer, &QTcpServer::newConnection, this, &Server::slotNewConnection);
-
-        if(!myServer->listen(QHostAddress::Any, port)){
-            qDebug() << "server is not started";
-        } else {
-            qDebug() << "server is started";
-        }
-    }
-Server::~Server(){
-    qDebug() << "Server closed";
 }
-    void Server::slotNewConnection()
+
+void MyServer::startServer(int port_,QMap<QString,QVariant> collection_)
+{
+    port = port_;
+    collection = collection_;
+    if(!this->listen(QHostAddress::Any,port))
     {
-        qDebug() << "New connetction";
-        mySocket = myServer->nextPendingConnection();
-        QString hello = "Server hosted by " + name;
-        mySocket->write(hello.toUtf8());
-
-        connect(mySocket, &QTcpSocket::readyRead, this, &Server::slotServerRead);
-        connect(mySocket, &QTcpSocket::disconnected, this, &Server::slotClientDisconnected);
+        qDebug() << "Could not start server";
     }
-
-    void Server::slotServerRead()
+    else
     {
-        while(mySocket->bytesAvailable()>0)
-        {
-            qDebug() << "New request";
-            QByteArray array = mySocket->readAll();
-            qDebug() << array;
-            QString s = "";
-            QString arrS = (QString)array;
-            for (int i = 0;i <arrS.size()-2;i++)
-                s.append(arrS[i]);
-            qDebug() << "Request: " << s << " Answer: " << collection[s].toString().toUtf8();
-            mySocket->write(collection[s].toString().toUtf8());
-        }
+        qDebug() << "Listening to port " << port << "...";
     }
+}
 
-    void Server::slotClientDisconnected()
-    {
-        mySocket->close();
-        mySocket->deleteLater();
-    }
+void MyServer::incomingConnection(qintptr socketDescriptor)
+{
+    // We have a new connection
+    qDebug() << socketDescriptor << " Connecting...";
 
+    MyThread *thread = new MyThread(socketDescriptor,collection, this);
+
+    // connect signal/slot
+    // once a thread is not needed, it will be beleted later
+    connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
+
+    thread->start();
+}

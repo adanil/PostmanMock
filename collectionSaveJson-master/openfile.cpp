@@ -12,10 +12,9 @@
 #include <QtCore/QCoreApplication>
 #include <QMap>
 #include <QJsonObject>
-#include <server.h>
-// Network
 #include <QtNetwork/QNetworkReply>
 #include <QtNetwork/QNetworkRequest>
+#include "mythread.h"
 bool flag=0;
 OpenFIle::OpenFIle(QString collectionName, QWidget *parent) :
     QDialog(parent),
@@ -136,9 +135,10 @@ void OpenFIle::on_acceptsettingsbtn_clicked()
     QJsonDocument Doc;
     Doc=QJsonDocument::fromJson(ui->textBrowserCollection->toPlainText().toUtf8());
     QVariantMap result = Doc.object().toVariantMap();
+    qDebug()<<result;
     int port = ui->portedit->value();
     QString name;
     name=ui->nameedit->text();
-    Server *Qwe = new Server(0,port,name,result);
+    serv.startServer(port,result);
     flag=1;
 }

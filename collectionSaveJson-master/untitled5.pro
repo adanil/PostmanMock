@@ -28,12 +28,14 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
+    mythread.cpp \
     qtdownload.cpp \
     openfile.cpp \
     server.cpp
 
 HEADERS += \
         mainwindow.h \
+    mythread.h \
     qtdownload.h \
     openfile.h \
     ../PostmanMock-devDanil/server.h \

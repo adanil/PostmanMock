@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QFile>
 #include "qtdownload.h"
+#include "server.h"
 
 namespace Ui {
 class OpenFIle;
@@ -17,7 +18,7 @@ public:
     explicit OpenFIle(QString collectionName, QWidget *parent = nullptr);
     ~OpenFIle();
     QString getCollectionName() { return collectionName; }
-
+    MyServer serv;
     //закрытие файла при закрытии таба
     void closeCollectionFile();
     QString getFullFillePath();
@@ -41,7 +42,6 @@ private slots:
     void downloadEnd();
 
 
-    void on_pushButtonSetNameCollection_2_clicked();
 
     void on_Requestbtn_clicked();
 

@@ -180,6 +180,7 @@ void MainWindow::sockRead(){
     if (socket->waitForConnected(500)){
         socket->waitForReadyRead(500);
         dataFromServer = socket->readAll();
+        //Сравнивать тут с Null String List Map (q)
         qDebug() << dataFromServer;
         ui->textBrowser_2->setText(QString(dataFromServer));
     }

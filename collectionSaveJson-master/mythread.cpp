@@ -41,14 +41,35 @@ void MyThread::run()
 
 void MyThread::readyRead()
 {
-    QByteArray array = socket->readAll();
+     QByteArray array = socket->readAll();
     qDebug() << array;
     QString s = "";
+    QByteArray answer;
     QString arrS = (QString)array;
     for (int i = 0;i <arrS.size();i++)
         s.append(arrS[i]);
     qDebug() << "Request: " << s << " Answer: " << collection[s];
-    socket->write(collection[s].toString().toUtf8());
+    if(QString(collection[s].typeName())=="QString")
+    {
+        answer=collection[s].toByteArray();
+    }
+    else if(QString(collection[s].typeName())=="nullptr")
+    {
+        answer="null";
+    }
+    else if (QString(collection[s].typeName())=="double")
+    {
+        answer=collection[s].toByteArray();
+    }
+    else if (QString(collection[s].typeName())=="int")
+    {
+        answer=collection[s].toByteArray();
+    }
+    else if (QString(collection[s].typeName())=="QVariantList")
+    {
+        answer=collection[s];
+    }
+    socket->write(answer);
 }
 
 void MyThread::disconnected()

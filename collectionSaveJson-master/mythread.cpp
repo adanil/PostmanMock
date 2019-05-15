@@ -46,28 +46,30 @@ void MyThread::readyRead()
     QString s = "";
     QByteArray answer;
     QString arrS = (QString)array;
+    QJsonDocument Doc;
     for (int i = 0;i <arrS.size();i++)
         s.append(arrS[i]);
     qDebug() << "Request: " << s << " Answer: " << collection[s];
-    if(QString(collection[s].typeName())=="QString")
+    Doc=QJsonDocument::fromJson(collection[s].toByteArray());
+    if(QString(collection[s].typeName())=="QString")//Если тип строка
     {
         answer=collection[s].toByteArray();
     }
-    else if(QString(collection[s].typeName())=="nullptr")
+    else if(QString(collection[s].typeName())=="std::nullptr_t")//Нулевой указатель
     {
         answer="null";
     }
-    else if (QString(collection[s].typeName())=="double")
+    else if (QString(collection[s].typeName())=="double")//Двойная точность
     {
         answer=collection[s].toByteArray();
     }
-    else if (QString(collection[s].typeName())=="int")
+    else if (QString(collection[s].typeName())=="int")//Целое
     {
         answer=collection[s].toByteArray();
     }
-    else if (QString(collection[s].typeName())=="QVariantList")
+    else if (QString(collection[s].typeName())=="QVariantList")//Вот тут
     {
-        answer=collection[s];
+        answer=collection[s].toJsonDocument().toBinaryData();
     }
     socket->write(answer);
 }

@@ -181,7 +181,7 @@ void MainWindow::sockRead(){
         socket->waitForReadyRead(500);
         dataFromServer = socket->readAll();
         qDebug() << dataFromServer;
-        ui->textBrowser_2->setText(QString(dataFromServer));
+        ui->textBrowser_2->setText(dataFromServer);
     }
 }
 

@@ -69,7 +69,8 @@ void MyThread::readyRead()
     }
     else if (QString(collection[s].typeName())=="QVariantList")//Вот тут
     {
-        answer=collection[s].toJsonDocument().toBinaryData();
+        qDebug() << "here";
+        socket->write(QJsonDocument::fromVariant(collection[s]).toJson());
     }
     socket->write(answer);
 }
